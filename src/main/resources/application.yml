@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/departments?useSSL=false
+    password: Mysql@123
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+welcome:
+  message: Welcome to Code cracker!! awesome!
