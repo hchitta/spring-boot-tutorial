@@ -1,7 +1,10 @@
 package com.codecracker.springboot.tutorial.controller;
 
 import com.codecracker.springboot.tutorial.entity.Department;
+import com.codecracker.springboot.tutorial.error.DepartmentNotFoundException;
 import com.codecracker.springboot.tutorial.service.DepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,18 +17,23 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
+
     @PostMapping("/departments")
     public Department saveDepartment(@Valid @RequestBody Department department) {
+        LOGGER.info("inside saveDepartment of DepartmentController");
         return departmentService.saveDepartment(department);
     }
 
     @GetMapping("/departments")
     public List<Department> fetchDepartments() {
-            return  departmentService.fetchDepartments();
+        LOGGER.info("inside fetchDepartments of DepartmentController");
+        return  departmentService.fetchDepartments();
     }
 
     @GetMapping("/departments/{id}")
-    public Department getDepartmentById(@PathVariable("id") Long deptId) {
+    public Department getDepartmentById(@PathVariable("id") Long deptId) throws DepartmentNotFoundException {
+        LOGGER.info("inside getDepartmentById of DepartmentController");
         return departmentService.getDepartmentById(deptId);
     }
 
