@@ -1,8 +1,57 @@
+
+spring:
+  profiles:
+    active: qa
+---
+
 spring:
   datasource:
     username: root
     url: jdbc:mysql://localhost:3306/departments?useSSL=false
     password: Mysql@123
+    profiles: dev
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+welcome:
+  message: Welcome to Code cracker!! awesome!
+
+---
+
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/departments-qa?useSSL=false
+    password: Mysql@123
+    profiles: qa
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+welcome:
+  message: Welcome to Code cracker!! awesome!
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+          exclude: "env,beans"
+
+---
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/departments-prod?useSSL=false
+    password: Mysql@123
+    profiles: prod
   jpa:
     properties:
       hibernate:
